@@ -1,0 +1,67 @@
+/* Container for the dashboard, providing full-screen coverage */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    font-family: 'Arial', sans-serif;
+    overflow: auto;
+    padding: 20px;
+}
+
+/* Inner box containing the dashboard information */
+.dashboard-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Dashboard title */
+.dashboard-box h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+}
+
+/* List of information */
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Individual info items */
+.info-list p {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+    border-left: 4px solid #9b59b6;
+}
+
+/* Highlight the strong tags */
+.info-list p strong {
+    color: #333;
+}
+
+/* Scrollbar styling */
+.dashboard-box::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dashboard-box::-webkit-scrollbar-thumb {
+    background-color: #9b59b6;
+    border-radius: 5px;
+}
+
+.dashboard-box::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}

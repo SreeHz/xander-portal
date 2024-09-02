@@ -1,19 +1,41 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import '../styles/LoginPage.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError('Please fill in all fields.');
       return;
     }
-    alert('Login successful!');
+    try {
+      const ipResponse = await axios.get('https://api.ipify.org?format=json');
+      const publicIp = ipResponse.data.ip;
+
+      const response = await axios.post('http://localhost:5000/api/login', {
+        email,
+        password,
+        ip: publicIp,
+      });
+
+      if (response.data.success) {
+        setError('');
+        Cookies.set('session', response.data.ip, { expires: 1 }); // 1 day expiration
+        navigate('/dashboard', { state: { ip: publicIp } }); // Redirect to the dashboard
+      } else {
+        setError('Invalid credentials');
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
+    }
   };
 
   return (
